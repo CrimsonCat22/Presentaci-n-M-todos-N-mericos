@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Matrices en Ingeniería en Computación - Dark Mode</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        .reveal {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; 
+            color: #c9d1d9;
+        }
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #00d2ff; 
+            text-transform: none;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+            text-align: left;
+        }
+        
+        .reveal h1.main-title {
+            font-size: 2.5rem; 
+            line-height: 1.2;
+            color: #00f5d4; 
+            text-align: center; 
+        }
+
+        .slide-container {
+            border: 3px solid #00d2ff;
+            border-radius: 16px;
+            padding: 40px;
+            background-color: #161b22; 
+            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.15);
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .reveal section img {
+            border: 2px solid #00f5d4;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 245, 212, 0.2);
+            max-height: 350px;
+            opacity: 0.9;
+            object-fit: cover;
+        }
+        
+        .layout-split {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        .layout-split > div {
+            flex: 1;
+        }
+        
+        .reveal p, .reveal li {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e6edf3;
+            text-align: justify !important;
+            hyphens: auto; 
+        }
+        
+        strong {
+            color: #00f5d4; 
+        }
+
+        .code-block {
+            background-color: #010409;
+            color: #79c0ff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            text-align: left !important;
+            border-left: 5px solid #00d2ff;
+        }
+        
+        .reveal .controls-arrow { color: #00d2ff !important; }
+        .reveal .progress span { background: #00f5d4 !important; }
+
+        /* Respaldo CSS de impresión por si acaso */
+        @media print {
+            body, html, .reveal, .reveal .slides {
+                background: #0d1117 !important;
+                background-color: #0d1117 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .slide-container {
+                background-color: #161b22 !important;
+                border: 3px solid #00d2ff !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <section data-transition="zoom" data-background-color="#0d1117">
+                <div class="slide-container" style="align-items: center; text-align: center;">
+                    <h1 class="main-title">Matrices y Transformaciones Lineales</h1>
+                    <h3 style="color: #8b949e; font-size: 1.5rem; margin-top: 20px; text-align: center;">Su impacto fundamental en la Ingeniería en Computación</h3>
+                    <p style="margin-top: 50px; color: #58a6ff; font-size: 0.9rem; text-align: center !important;">(Usa las flechas del teclado para navegar)</p>
+                </div>
+            </section>
+
+            <section data-transition="slide-up" data-background-color="#0d1117">
+                <div class="slide-container">
+                    <h2>Objetivos de la Presentación</h2>
+                    <ul style="margin-top: 30px;">
+                        <li>Presentar la relación directa entre las <strong>transformaciones lineales</strong> y las matrices.</li>
+                        <li>Explicar cómo el software representa el espacio geométrico mediante vectores.</li>
+                        <li>Demostrar cómo las matrices resuelven sistemas de ecuaciones en algoritmos complejos.</li>
+                        <li>Explorar el uso práctico de estas estructuras en el hardware (GPU) y software actual.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section data-transition="convex" data-background-color="#0d1117">
+                <div class="slide-container layout-split">
+                    <div>
+                        <h2>¿Qué es una Transformación Lineal?</h2>
+                        <p>En nuestra ingeniería, una transformación es una función matemática que toma un vector de entrada y nos devuelve un vector de salida modificado.</p>
+                        <p>Para que sea considerada <strong>lineal</strong>, el origen de coordenadas debe mantenerse fijo (0,0) y todas las líneas de la cuadrícula deben continuar siendo paralelas y uniformes en el plano.</p>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1632516643720-e7f5d7d6ecc9?auto=format&fit=crop&w=600&q=80" alt="Abstracción matemática tecnológica">
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="concave" data-background-color="#0d1117">
+                <div class="slide-container layout-split">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80" alt="Gráfica matemática abstracta">
+                    </div>
+                    <div>
+                        <h2>Reglas de Linealidad</h2>
+                        <p>Cualquier transformación lógica en el código debe cumplir estrictamente dos propiedades algebraicas fundamentales para su correcto funcionamiento:</p>
+                        <ul>
+                            <li><strong>Preserva sumas:</strong> <br>L(v + w) = L(v) + L(w)</li>
+                            <li style="margin-top: 15px;"><strong>Preserva multiplicación escalar:</strong> <br>L(av) = aL(v)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="fade" data-background-color="#0d1117">
+                <div class="slide-container layout-split">
+                    <div>
+                        <h2>Representación en Computadoras</h2>
+                        <p>Las computadoras no entienden de "espacio abstracto", entienden puramente de <strong>coordenadas numéricas</strong> y estructuras lógicas de datos.</p>
+                        <p>Para registrar una transformación en el sistema, solo necesitamos registrar dónde terminan los vectores unitarios elementales. Al empaquetar estos vectores en columnas, creamos una <strong>matriz</strong>, la estructura central que procesará el hardware.</p>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Estructura de matriz digital">
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="slide" data-background-color="#0d1117">
+                <div class="slide-container layout-split">
+                    <div>
+                        <h2>Sistemas de Ecuaciones (Ax = v)</h2>
+                        <p>En computación manejamos múltiples variables interactuando en simultáneo, como flujos de datos o procesamiento en redes. Estructuramos el problema matemáticamente:</p>
+                        <ul>
+                            <li><strong>Matriz A:</strong> Coeficientes del sistema.</li>
+                            <li><strong>Vector x:</strong> Las incógnitas a resolver.</li>
+                            <li><strong>Vector v:</strong> Las restricciones constantes.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Líneas de código y analítica de datos masivos">
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom" data-background-color="#0d1117">
+                <div class="slide-container">
+                    <h2>Las Matrices en el Código</h2>
+                    <p>En el desarrollo de software moderno, modelamos estas abstracciones matemáticas complejas utilizando arreglos bidimensionales integrados directamente en el código fuente:</p>
+                    <div class="code-block">
+<pre><code>// Declaración de una matriz de transformación 2x2
+int[][] matrizA = {
+    {1, 3},
+    {-2, 0}
+};
+
+// Aplicando una transformación lineal de escalado simple
+for (int i = 0; i < matrizA.length; i++) {
+    for (int j = 0; j < matrizA[i].length; j++) {
+        matrizA[i][j] = matrizA[i][j] * factorEscalar;
+    }
+}
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="slide" data-background-color="#0d1117">
+                <div class="slide-container layout-split">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&w=600&q=80" alt="Renderizado de vectores en 3D">
+                    </div>
+                    <div>
+                        <h2>Aplicación: Gráficos por Computadora</h2>
+                        <p>La <strong>GPU</strong> está construida con miles de núcleos optimizados con un único propósito: realizar multiplicaciones de matrices en paralelo de forma masiva y eficiente.</p>
+                        <p>Cualquier videojuego rota, escala o traslada objetos virtuales aplicando directamente matrices de transformación a los vértices tridimensionales.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="convex" data-background-color="#0d1117">
+                <div class="slide-container layout-split">
+                    <div>
+                        <h2>Aplicación: Visión Artificial</h2>
+                        <p>Una imagen digital en memoria no es más que una matriz gigante repleta de datos numéricos correspondientes a los colores de cada uno de los píxeles.</p>
+                        <p>Para aplicar filtros avanzados (como detección de bordes), el software hace convolución: desliza una pequeña matriz llamada <strong>Kernel</strong> sobre la matriz de la imagen.</p>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?auto=format&fit=crop&w=600&q=80" alt="Procesamiento digital de imágenes">
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="concave" data-background-color="#0d1117">
+                <div class="slide-container layout-split">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80" alt="Representación de inteligencia artificial">
+                    </div>
+                    <div>
+                        <h2>Aplicación: Inteligencia Artificial</h2>
+                        <p>El Machine Learning y las Redes Neuronales Profundas guardan todos sus patrones lógicos de comportamiento aprendido dentro de enormes matrices de "pesos".</p>
+                        <p>El entrenamiento de una IA es, en su esencia más pura, la optimización repetitiva de millones de operaciones matriciales complejas sobre los llamados <strong>Tensores</strong>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="slide-up" data-background-color="#0d1117">
+                <div class="slide-container layout-split">
+                    <div>
+                        <h2>Aplicación: Criptografía y Seguridad</h2>
+                        <p>Algoritmos de cifrado simétrico de nivel militar como el estándar <strong>AES</strong> manipulan los bloques de información utilizando transformaciones lineales muy complejas.</p>
+                        <p>La única manera matemática de recuperar los datos originales de forma legítima es multiplicando el mensaje cifrado por la <strong>matriz inversa</strong> correspondiente a la clave.</p>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="Criptografía y seguridad de datos">
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom" data-background-color="#0d1117">
+                <div class="slide-container layout-split">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Conectividad y datos del mundo digital">
+                    </div>
+                    <div>
+                        <h2>Conclusión</h2>
+                        <p>Las matrices no pertenecen únicamente a los libros teóricos de matemáticas; constituyen el núcleo lógico indiscutible sobre el cual se ejecuta absolutamente todo el software contemporáneo.</p>
+                        <p>Dominar las transformaciones lineales permite a los ingenieros en computación optimizar código crítico, desarrollar hardware de alto rendimiento y liderar el futuro tecnológico.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+    
+    <script>
+        if (window.location.search.match(/print-pdf/gi)) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/print/pdf.min.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+    </script>
+    
+    <script>
+        Reveal.initialize({
+            transition: 'slide', 
+            transitionSpeed: 'slow', 
+            controls: true, 
+            progress: true, 
+            center: true, 
+            hash: true 
+        });
+    </script>
+</body>
+</html>
