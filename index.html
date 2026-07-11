@@ -103,9 +103,15 @@
     </style>
 </head>
 <body>
-    <audio autoplay loop>
+    <audio id="musica" loop>
     <source src="musica_fondo.mp3" type="audio/mpeg">
-    </audio>
+</audio>
+<script>
+    document.addEventListener('click', function() {
+        var audio = document.getElementById("musica");
+        audio.play();
+    }, { once: true });
+</script>
     <div class="reveal">
         <div class="slides">
             
